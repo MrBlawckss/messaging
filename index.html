@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Relay is a clean, code-first messaging prototype." />
-    <meta name="theme-color" content="#0b1110" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230b1110'/%3E%3Cpath d='M15 17h34v25H31L20 50v-8h-5z' fill='%23d9ff67'/%3E%3Cpath d='M24 29h16M24 35h10' stroke='%230b1110' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <meta name="description" content="Relay is a private, code-first global messaging prototype." />
+    <meta name="theme-color" content="#08100e" />
     <link rel="stylesheet" href="styles.css" />
     <title>Relay — Global messaging</title>
   </head>
@@ -14,7 +13,7 @@
       <aside class="sidebar" id="sidebar" aria-label="Conversations">
         <header class="brand-row">
           <a class="brand" href="#" aria-label="Relay home">
-            <span class="brand-mark" aria-hidden="true">R</span>
+            <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 8.5h18v13H15l-5.5 4v-4H7z"/><path d="M12 14h8M12 17.5h5"/></svg></span>
             <span>Relay</span>
           </a>
           <button class="icon-button mobile-only" id="closeSidebar" type="button" aria-label="Close conversations">×</button>
@@ -25,39 +24,32 @@
             <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
             <span class="sr-only">Search conversations</span>
             <input id="contactSearch" type="search" placeholder="Search conversations" autocomplete="off" />
-            <kbd>⌘ K</kbd>
+            <kbd>Ctrl K</kbd>
           </label>
-          <button class="add-contact" id="openAddContact" type="button"><span aria-hidden="true">＋</span> Add contact</button>
+          <button class="add-contact" id="openAddContact" type="button"><span aria-hidden="true">＋</span> Add by contact code</button>
         </div>
 
         <section class="conversation-list" aria-labelledby="messagesHeading">
-          <div class="section-heading">
-            <h2 id="messagesHeading">Messages</h2>
-            <span id="contactCount">0</span>
-          </div>
+          <div class="section-heading"><h2 id="messagesHeading">Messages</h2><span id="contactCount">0</span></div>
           <div id="contactList"></div>
           <p class="empty-list" id="emptyList" hidden>No conversations found.</p>
         </section>
 
         <button class="profile-card" id="openProfile" type="button" aria-label="Edit your profile">
           <span class="avatar avatar-self" id="selfAvatar">L</span>
-          <span class="profile-copy"><strong id="sidebarDisplayName">Levi</strong><small><span class="online-dot"></span> Available</small></span>
+          <span class="profile-copy"><strong id="sidebarDisplayName">Levi</strong><small><span class="online-dot"></span> Available worldwide</small></span>
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </aside>
 
       <main class="chat" aria-label="Current conversation">
         <header class="chat-header">
-          <button class="icon-button mobile-only" id="openSidebar" type="button" aria-label="Open conversations">
-            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h11"/></svg>
-          </button>
+          <button class="icon-button mobile-only" id="openSidebar" type="button" aria-label="Open conversations"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h11"/></svg></button>
           <div class="chat-person">
             <span class="avatar" id="activeAvatar">M</span>
             <span><strong id="activeName">Maya Chen</strong><small id="activeStatus">Active now</small></span>
           </div>
-          <button class="icon-button" id="conversationInfo" type="button" aria-label="Show contact information" aria-expanded="false">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.1"/></svg>
-          </button>
+          <button class="icon-button" id="conversationInfo" type="button" aria-label="Show contact information" aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.1"/></svg></button>
         </header>
 
         <section class="messages" id="messages" aria-live="polite" aria-label="Message history"></section>
@@ -68,9 +60,7 @@
             <textarea id="messageInput" rows="1" maxlength="1200" placeholder="Write a message…" required></textarea>
             <span class="send-hint">Enter to send</span>
           </label>
-          <button class="send-button" type="submit" aria-label="Send message">
-            <svg viewBox="0 0 24 24"><path d="m4 12 16-8-5 16-3-7-8-1Z"/><path d="m12 13 8-9"/></svg>
-          </button>
+          <button class="send-button" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24"><path d="m4 12 16-8-5 16-3-7-8-1Z"/><path d="m12 13 8-9"/></svg></button>
         </form>
       </main>
 
@@ -80,17 +70,44 @@
         <span class="avatar avatar-xl" id="detailsAvatar">M</span>
         <h2 id="detailsName">Maya Chen</h2>
         <p class="muted" id="detailsStatus">Toronto, Canada</p>
+        <div class="status-pill"><span class="online-dot"></span><span id="detailsPresence">Active now</span></div>
         <div class="detail-block">
           <span>Contact code</span>
           <button class="code-copy" id="copyContactCode" type="button"><code id="detailsCode">Maya7C4nQ2</code><span>Copy</span></button>
         </div>
-        <div class="detail-block">
-          <span>About</span>
-          <p id="detailsAbout">Building thoughtful things, one small step at a time.</p>
-        </div>
+        <div class="detail-block"><span>About</span><p id="detailsAbout">Building thoughtful things, one small step at a time.</p></div>
+        <p class="encrypted"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Encryption-ready prototype</p>
       </aside>
     </div>
 
     <div class="scrim" id="scrim" hidden></div>
 
     <dialog id="addContactDialog">
+      <form class="dialog-card" id="addContactForm">
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button>
+        <span class="dialog-icon" aria-hidden="true">＋</span>
+        <h2>Add a global contact</h2>
+        <p>Enter their unique Relay code to start a private conversation from anywhere.</p>
+        <label>Contact code<input id="contactCodeInput" name="contactCode" autocomplete="off" placeholder="e.g. hdw98Wfdha9AWH" required /></label>
+        <p class="form-error" id="contactError" role="alert"></p>
+        <button class="primary-button" type="submit">Find contact</button>
+        <small class="demo-hint">Try <button type="button" id="useDemoCode">hdw98Wfdha9AWH</button></small>
+      </form>
+    </dialog>
+
+    <dialog id="profileDialog">
+      <form class="dialog-card" id="profileForm">
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button>
+        <span class="dialog-icon profile-icon" aria-hidden="true">L</span>
+        <h2>Your Relay identity</h2>
+        <p>Your name is visible to people who add you with your contact code.</p>
+        <label>Display name<input id="profileNameInput" name="profileName" maxlength="40" required /></label>
+        <label>Your contact code<div class="input-action"><input id="profileCodeInput" readonly /><button id="copyProfileCode" type="button">Copy</button></div></label>
+        <button class="primary-button" type="submit">Save profile</button>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
