@@ -1,20 +1,22 @@
 # Relay
 
-A responsive, code-first messaging interface built as a static site for GitHub Pages.
+Relay is a responsive, code-first messaging prototype designed for static hosting such as GitHub Pages.
 
-## Preview locally
+## Run it
 
-Open `index.html` directly, or run a local static server from this folder.
+Open `index.html` directly, or serve this folder with any static file server.
+
+## Demo
+
+- Add a contact using `hdw98Wfdha9AWH`.
+- Change the display name from the profile card in the lower-left corner.
+- Search contacts, send messages, and copy contact codes.
+- Profile, contacts, and sent messages are saved in the browser with `localStorage`.
 
 ## Publish with GitHub Pages
 
-1. Create a GitHub repository and add these files at its root.
-2. In the repository, open **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `main` branch and `/ (root)`, then save.
+1. Put these four files at the root of a GitHub repository.
+2. Open **Settings → Pages** in that repository.
+3. Choose **Deploy from a branch**, then select `main` and `/ (root)`.
 
-## Demo behavior
-
-- Profile, contacts, and sent messages persist in the browser using `localStorage`.
-- Use contact code `hdw98Wfdha9AWH` to try adding a new contact.
-- This static build is a working front-end prototype. Real cross-device accounts and global realtime messaging require an authentication and database service such as Firebase or Supabase.
+This is a front-end prototype. Real messaging between people and devices still requires authentication, a database, and a realtime backend such as Firebase or Supabase.
